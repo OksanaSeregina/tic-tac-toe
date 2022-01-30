@@ -171,7 +171,6 @@ body {
 .header-light-theme .info-header .switcher:hover {
   -webkit-filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
           filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
-
 }
 
 .main .hero {
@@ -512,7 +511,6 @@ body {
 .main .portfolio .container-imgs .item-portfolio {
   width: 32%;
   height: 560px;
-
 }
 
 .main .portfolio-light-theme .title {
@@ -580,7 +578,6 @@ body {
 .main .portfolio-light-theme .group-btn .active {
   color: var(--color-gold);
   background-color: #000000;
-
 }
 
 .main .video .title {
@@ -1205,8 +1202,6 @@ body {
   -webkit-filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
           filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
 }
-
-
 .footer-light-theme .content-footer .left-content-footer .link-github .item-link-github {
   color: #1c1c1c;
 }
@@ -1693,6 +1688,10 @@ body {
   .main .portfolio .container-imgs .item-portfolio {
     height: auto;
   }
+  .main .portfolio .title span {
+    font-size: 24px;
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -1715,6 +1714,9 @@ body {
 @media screen and (max-width: 375px) {
   .hamburger-menu {
     width: 30px;
+  }
+  .main .skills-light-theme .title span {
+    font-size: 26px;
   }
 }
 
