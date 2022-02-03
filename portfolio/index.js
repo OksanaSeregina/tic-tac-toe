@@ -4,7 +4,7 @@ console.log(`1.Вёрстка +10
 4.При перемещении ползунка регулятора громкости звука можно сделать звук громче или тише. Разный цвет регулятора громкости звука до и после ползунка +10
 5.При клике по кнопке Volume/Mute можно включить или отключить звук. Одновременно с включением/выключением звука меняется внешний вид кнопки. Также внешний вид кнопки меняется, если звук включают или выключают перетягиванием регулятора громкости звука от нуля или до нуля +10
 6.Кнопка Play/Pause в центре видео +10
-7.Дополнительный не предусмотренный в задании функционал (ТЕКУЩЕЕ ВРЕМЯ ПРОИГРЫВАНИЯ)
+7.Дополнительный не предусмотренный в задании функционал (ТЕКУЩЕЕ ВРЕМЯ ПРОИГРЫВАНИЯ И ПОЛНОЭКРАННЫЙ ПРОСМОТР ВИДЕО)
 
 
 Итого: 60`);
@@ -254,6 +254,7 @@ const progressControls = document.querySelector(".progress");
 const volumOn = document.querySelector(".volum-on");
 const volumeControls = document.querySelector(".volume");
 const screensaver = document.querySelector(".screensaver");
+const fullscreen = document.querySelector(".fullscreen");
 
 function tooglePlay() {
   if (video.paused) {
@@ -344,6 +345,18 @@ function toogleMute() {
   }
 }
 
+function openFullscreen() {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  }
+}
+
+video.addEventListener("fullscreenchange", () => {
+  play.classList.add("pause");
+  btnPlay.style.display = "none";
+});
 play.addEventListener("click", tooglePlay);
 video.addEventListener("click", tooglePlay);
 btnPlay.addEventListener("click", tooglePlay);
@@ -358,3 +371,4 @@ progressControls.addEventListener("input", updateControls);
 volumeControls.addEventListener("input", updateControls);
 volumOn.addEventListener("click", toogleMute);
 volumeControls.addEventListener("input", handleRangeUpdate);
+fullscreen.addEventListener("click", openFullscreen);

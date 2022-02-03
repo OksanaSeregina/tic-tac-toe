@@ -558,7 +558,7 @@ body {
           border: solid 2px var(--color-gold);
           border-radius: 8px;
           height: 10px;
-          width: 20%;
+          width: 17%;
           outline: none;
           transition: background 450ms ease-in;
           -webkit-appearance: none;
@@ -570,6 +570,11 @@ body {
           -webkit-appearance: none;
           cursor: ew-resize;
           background: #434343;
+        }
+        .fullscreen {
+          background-image: url(../assets/svg/fullscreen.svg);
+          filter: invert(82%) sepia(0%) saturate(0%) hue-rotate(330deg)
+            brightness(92%) contrast(97%);
         }
       }
     }
@@ -1244,7 +1249,7 @@ body {
     border: none;
   }
   .main .video .video-player .controls .volume {
-    width: 65%;
+    width: 45%;
     border: none;
   }
   .main .price .cards-price .item-price {
@@ -1348,9 +1353,6 @@ body {
     width: 25px;
     height: 25px;
   }
-  .main .video .video-player .controls .volume {
-    width: 55%;
-  }
   .main .video .video-player .controls .volume,
   .main .video .video-player .controls .progress {
     height: 7px;
@@ -1402,9 +1404,6 @@ body {
   .main .video .video-player .controls .volume,
   .main .video .video-player .controls .progress {
     height: 5px;
-  }
-  .main .video .video-player .controls .volume {
-    width: 50%;
   }
 }
 @media screen and (max-width: 375px) {
