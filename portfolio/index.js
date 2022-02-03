@@ -1,9 +1,13 @@
-console.log(`1.Смена изображений в секции portfolio +25
-2.Перевод страницы на два языка +25
-3.Переключение светлой и тёмной темы +25
-4.Дополнительный функционал: выбранный пользователем язык отображения страницы и светлая или тёмная тема сохраняются при перезагрузке страницы +5
-5.Дополнительный функционал: сложные эффекты для кнопок при наведении (выбран из предложенных эффектов) +5
-Итого: 85`);
+console.log(`1.Вёрстка +10
+2.Кнопка Play/Pause на панели управления +10
+3.Прогресс-бар отображает прогресс проигрывания видео. При перемещении ползунка прогресс-бара вручную меняется текущее время проигрывания видео. Разный цвет прогресс-бара до и после ползунка +10
+4.При перемещении ползунка регулятора громкости звука можно сделать звук громче или тише. Разный цвет регулятора громкости звука до и после ползунка +10
+5.При клике по кнопке Volume/Mute можно включить или отключить звук. Одновременно с включением/выключением звука меняется внешний вид кнопки. Также внешний вид кнопки меняется, если звук включают или выключают перетягиванием регулятора громкости звука от нуля или до нуля +10
+6.Кнопка Play/Pause в центре видео +10
+7.Дополнительный не предусмотренный в задании функционал (ТЕКУЩЕЕ ВРЕМЯ ПРОИГРЫВАНИЯ)
+
+
+Итого: 60`);
 
 const i18Obj = {
   en: {
@@ -239,3 +243,118 @@ function getLocalStorage() {
   }
 }
 window.addEventListener("load", getLocalStorage);
+
+//Custom video
+const video = document.querySelector(".viewer");
+const btnPlay = document.querySelector(".btn-play");
+const play = document.querySelector(".play");
+var currTime = document.querySelector(".current-time");
+var durationTime = document.querySelector(".duration-time");
+const progressControls = document.querySelector(".progress");
+const volumOn = document.querySelector(".volum-on");
+const volumeControls = document.querySelector(".volume");
+const screensaver = document.querySelector(".screensaver");
+
+function tooglePlay() {
+  if (video.paused) {
+    screensaver.style.display = "none";
+    video.play();
+    play.classList.add("pause");
+    btnPlay.style.display = "none";
+  } else {
+    video.pause();
+    play.classList.remove("pause");
+    btnPlay.style.display = "inline-block";
+  }
+}
+
+function videoTime(time) {
+  time = Math.floor(time);
+  let minutes = Math.floor(time / 60);
+  let seconds = Math.floor(time - minutes * 60);
+  let minutesVal = minutes;
+  let secondsVal = seconds;
+  if (minutes < 10) {
+    minutesVal = `0${minutes}`;
+  }
+  if (seconds < 10) {
+    secondsVal = `0${seconds}`;
+  }
+  return `${minutesVal}:${secondsVal}`;
+}
+function videoProgressTime() {
+  progress = Math.floor(video.currentTime) / (Math.floor(video.duration) / 100);
+  progressControls.value = progress;
+  currTime.innerHTML = videoTime(video.currentTime);
+}
+
+function playbackTime() {
+  let timeDurution = videoTime(video.duration);
+  durationTime.innerHTML = timeDurution;
+}
+
+function handleProgressBar() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressControls.style.background = `linear-gradient(to right, var(--color-gold) 0%, var(--color-gold) ${percent}%, #fff ${percent}%, #fff 100%)`;
+  endedTime();
+}
+
+function slidingProgress() {
+  progressControls.value =
+    (video.currentTime / video.duration) * progressControls.max;
+  handleProgressBar();
+}
+
+const scrub = (e) => {
+  const time = (e.offsetX / progressControls.offsetWidth) * video.duration;
+  video.currentTime = time;
+};
+
+function endedTime() {
+  if (video.ended) {
+    video.currentTime = 0;
+    play.classList.remove("pause");
+    btnPlay.style.display = "inline-block";
+  }
+}
+
+function updateControls() {
+  const value = this.value;
+  this.style.background = `linear-gradient(to right, rgb(189, 174, 130) 0%, rgb(189, 174, 130) ${value}%, rgb(200, 200, 200) ${value}%, rgb(200, 200, 200) 100%)`;
+}
+
+function handleRangeUpdate() {
+  video.volume = volumeControls.value / 100;
+  if (video.volume === 0) {
+    volumOn.classList.add("volum-off");
+  } else {
+    volumOn.classList.remove("volum-off");
+  }
+}
+
+function toogleMute() {
+  volumOn.classList.toggle("volum-off");
+  if (volumOn.classList.contains("volum-off")) {
+    video.volume = 0;
+  } else {
+    video.volume = volumeControls.value / 100;
+  }
+  if (video.volume === 0) {
+    volumOn.classList.add("volum-off");
+  }
+}
+
+play.addEventListener("click", tooglePlay);
+video.addEventListener("click", tooglePlay);
+btnPlay.addEventListener("click", tooglePlay);
+screensaver.addEventListener("click", tooglePlay);
+video.addEventListener("timeupdate", handleProgressBar);
+video.addEventListener("timeupdate", slidingProgress);
+video.addEventListener("change", slidingProgress);
+video.addEventListener("timeupdate", videoProgressTime);
+video.addEventListener("loadedmetadata", playbackTime);
+progressControls.addEventListener("click", scrub);
+progressControls.addEventListener("input", updateControls);
+volumeControls.addEventListener("input", updateControls);
+volumOn.addEventListener("click", toogleMute);
+volumeControls.addEventListener("input", handleRangeUpdate);

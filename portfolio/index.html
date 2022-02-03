@@ -176,8 +176,36 @@
       <section class="video" id="video">
         <h2 class="title"><span data-i18="video">Video</span></h2>
         <div class="video-player center">
-          <img src="./assets/img/video-player.jpg" alt="video-player" />
+          <div class="screensaver"></div>
+          <video
+            class="view-video viewer"
+            src="./assets/video/video.mp4"
+          ></video>
           <button class="btn-play"></button>
+          <div class="controls">
+            <div class="icon-controls play"></div>
+            <span class="current-time">00:00</span>
+            <span class="slash-time"> / </span>
+            <span class="duration-time">00:00</span>
+            <input
+              type="range"
+              class="progress"
+              value="40"
+              min="0"
+              max="100"
+              step="1"
+            />
+            <div class="icon-controls volum-on"></div>
+            <input
+              type="range"
+              class="volume"
+              name="volume"
+              value="40"
+              min="0"
+              max="100"
+              step="1"
+            />
+          </div>
         </div>
       </section>
       <section class="price" id="price">
@@ -276,16 +304,16 @@
     </main>
     <footer class="footer container">
       <div class="content-footer center">
-        <a
-          class="left-content-footer"
-          href="https://github.com/OksanaSeregina"
-          target="_blank"
-          ><ul class="link-github">
-            <li class="item-link-github">&copy;</li>
-            <li class="item-link-github">2022</li>
-            <li class="item-link-github">github</li>
-          </ul></a
-        >
+        <ul class="link-github">
+          <li class="item-link-github">&copy;</li>
+          <li class="item-link-github">2022</li>
+          <a
+            class="link-github-footer"
+            href="https://github.com/OksanaSeregina"
+            target="_blank"
+            ><li class="item-link-github">OksanaSeregina</li></a
+          >
+        </ul>
         <a
           class="center-content-footer"
           href="https://rs.school/js-stage0/"
