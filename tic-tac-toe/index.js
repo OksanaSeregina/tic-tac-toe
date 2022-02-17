@@ -21,15 +21,27 @@ let currentCount;
 
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
-//const winningMessage = () => `Player ${currentPlayer} has won!`;
-const winningMessage = () => {
-  console.log(currentCount);
-  return `Player ${currentPlayer} has won!`;
-};
+const winningMessage = () => `
+  <h2 class="result-game">
+    Player <span class="style-player ${classAdd()}">${currentPlayer}</span> won on turn ${currentCount}.
+  </h2>
+  <h2 class="result-game">
+    A total of ${countXPlayer + countOPlayer + 1} moves were made.
+  </h2>
+  `;
 const drawMessage = () => `Game ended in a draw!`;
-const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+const currentPlayerTurn = () => `
+  <h2 class="result-game">
+    It's <span class="style-player ${classAdd()}">${currentPlayer}</span> 's turn
+  </h2>
+  `;
 
 statusDisplay.innerHTML = currentPlayerTurn();
+
+function classAdd() {
+  currentClass = currentPlayer === xPlayer ? "color-blue" : "color-pink";
+  return currentClass;
+}
 
 function handleItemPlayed(clickedItem, clickedItemIndex) {
   gameState[clickedItemIndex] = currentPlayer;
@@ -44,8 +56,6 @@ function handleItemPlayed(clickedItem, clickedItemIndex) {
 }
 
 function handlePlayerChange() {
-  //   currentPlayer = currentPlayer === xPlayer ? oPlayer : xPlayer;
-
   if (currentPlayer === xPlayer) {
     currentPlayer = oPlayer;
     countXPlayer += 1;
