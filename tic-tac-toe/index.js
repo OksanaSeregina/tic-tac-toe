@@ -1,4 +1,8 @@
 const statusDisplay = document.querySelector(".result-game");
+const recordsView = document.querySelector(".records");
+const contentPlay = document.querySelector(".content");
+const contentTable = document.querySelector(".contentTable");
+const tBody = document.querySelector("tbody");
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -20,16 +24,42 @@ let countOPlayer = 0;
 let currentCount;
 
 let gameState = ["", "", "", "", "", "", "", "", ""];
+const records = [];
 
-const winningMessage = () => `
-  <h2 class="result-game">
+const winningMessage = () => {
+  if (records.length === 10) {
+    records.shift();
+  }
+  records.push({
+    winner: currentPlayer,
+    totalMoves: countXPlayer + countOPlayer + 1,
+    winningMove: currentCount,
+  });
+  localStorage.setItem("oksanaRecords", JSON.stringify(records));
+  return `<h2 class="result-game">
     Player <span class="style-player ${classAdd()}">${currentPlayer}</span> won on turn ${currentCount}.
   </h2>
   <h2 class="result-game">
     A total of ${countXPlayer + countOPlayer + 1} moves were made.
   </h2>
   `;
-const drawMessage = () => `Game ended in a draw!`;
+};
+
+const drawMessage = () => {
+  if (records.length === 10) {
+    records.shift();
+  }
+  records.push({
+    winner: "Game ended in a draw",
+    totalMoves: countXPlayer + countOPlayer + 1,
+    winningMove: "-",
+  });
+  localStorage.setItem("oksanaRecords", JSON.stringify(records));
+  return `<h2 class="result-game">
+  Game ended in a draw!
+  </h2>`;
+};
+
 const currentPlayerTurn = () => `
   <h2 class="result-game">
     It's <span class="style-player ${classAdd()}">${currentPlayer}</span> 's turn
@@ -120,12 +150,47 @@ function handleRestartGame() {
   currentCount = 0;
 }
 
+function showTable() {
+  contentPlay.classList.toggle("hide");
+  contentTable.classList.toggle("hide");
+  if (!contentTable.classList.contains("hide")) {
+    recordsView.textContent = "play";
+  } else {
+    recordsView.textContent = "table of records";
+  }
+}
+
+function renderTable() {
+  let resultRecords = [];
+  resultRecords = JSON.parse(localStorage.getItem("oksanaRecords"));
+  tBody.innerHTML = "";
+  for (let i = 0; i < resultRecords.length; i++) {
+    let currentClass;
+    if (resultRecords[i].winner === "X") {
+      currentClass = "color-blue";
+    } else if (resultRecords[i].winner === "O") {
+      currentClass = "color-pink";
+    } else {
+      currentClass = "style-table";
+    }
+    tBody.innerHTML += `
+    <tr>
+        <td class="style-player ${currentClass}">${resultRecords[i].winner}</td>
+        <td>${resultRecords[i].totalMoves}</td>
+        <td>${resultRecords[i].winningMove}</td>
+    </tr>
+    `;
+  }
+}
+
 document
   .querySelector(".container-game")
   .addEventListener("click", handleItemClick);
 document
   .querySelector(".start-game")
   .addEventListener("click", handleRestartGame);
+recordsView.addEventListener("click", showTable);
+recordsView.addEventListener("click", renderTable);
 
 /* function playAudio() {
     audio.currentTime = 0;

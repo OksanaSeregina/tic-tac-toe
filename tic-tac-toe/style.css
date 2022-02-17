@@ -30,6 +30,9 @@ body {
   width: 100%;
   margin: 0 auto;
 }
+.hide {
+  display: none;
+}
 header {
   display: flex;
   align-items: center;
@@ -42,7 +45,7 @@ header {
 }
 .left-header {
   display: flex;
-  width: 30%;
+  width: 20%;
   justify-content: space-between;
   align-items: center;
 }
@@ -93,7 +96,7 @@ main {
 }
 section {
   text-align: center;
-  display: none;
+  /* display: none; */
 }
 .container-game {
   display: grid;
@@ -123,6 +126,13 @@ section {
 .color-pink {
   color: #f662d1;
 }
+.style-table {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  line-height: 50px;
+  color: #2d0625;
+  font-size: 2rem;
+}
 .start-game {
   width: 200px;
   height: 60px;
@@ -140,6 +150,29 @@ section {
 .start-game:hover {
   border: solid 1px #333333;
   background-color: rgba(150, 223, 244, 0.5);
+}
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: solid;
+}
+thead {
+  border: solid;
+}
+tbody {
+  border: solid;
+}
+th,
+td {
+  border: solid 2px #2d0625;
+}
+td {
+  text-align: center;
+}
+caption {
+  color: #2d0625;
+  font-weight: bold;
 }
 
 footer {
