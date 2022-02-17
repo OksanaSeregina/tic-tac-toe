@@ -6,16 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
     <link
+      rel="shortcut icon"
+      href="assets/tic-tac-toe.ico"
+      type="image/x-icon"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="wrapper">
-    <header></header>
+    <header>
+      <div class="header center">
+        <img class="logo" src="./assets/svg/tic-tac-toe.svg" alt="logo" />
+        <h1 class="title">Tic Tac Toe</h1>
+        <img class="sound" src="./assets/svg/volume.svg" alt="sound" />
+      </div>
+    </header>
     <main class="container">
       <section class="center">
-        <h1 class="title">Tic Tac Toe</h1>
         <div class="container-game">
           <div data-index="0" class="item"></div>
           <div data-index="1" class="item"></div>
@@ -27,7 +37,9 @@
           <div data-index="7" class="item"></div>
           <div data-index="8" class="item"></div>
         </div>
-        <h2 class="result-game"></h2>
+        <h2 class="result-game">
+          Player X won on turn 4. A total of 7 moves were made.
+        </h2>
         <button class="start-game">start over</button>
       </section>
     </main>

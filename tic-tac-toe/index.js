@@ -12,11 +12,20 @@ const winningConditions = [
 
 let gameActive = true;
 
-let currentPlayer = "X";
+const xPlayer = "X";
+const oPlayer = "O";
+let currentPlayer = xPlayer;
+let countXPlayer = 0;
+let countOPlayer = 0;
+let currentCount;
 
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
-const winningMessage = () => `Player ${currentPlayer} has won!`;
+//const winningMessage = () => `Player ${currentPlayer} has won!`;
+const winningMessage = () => {
+  console.log(currentCount);
+  return `Player ${currentPlayer} has won!`;
+};
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
@@ -25,16 +34,29 @@ statusDisplay.innerHTML = currentPlayerTurn();
 function handleItemPlayed(clickedItem, clickedItemIndex) {
   gameState[clickedItemIndex] = currentPlayer;
   clickedItem.innerHTML = currentPlayer;
-  if (currentPlayer == "X") {
-    document.querySelectorAll(".item")[clickedItemIndex].style.color = "blue";
+  if (currentPlayer === xPlayer) {
+    document.querySelectorAll(".item")[clickedItemIndex].style.color =
+      "#60d4cf";
   } else {
-    document.querySelectorAll(".item")[clickedItemIndex].style.color = "red";
+    document.querySelectorAll(".item")[clickedItemIndex].style.color =
+      "#f662d1";
   }
 }
 
 function handlePlayerChange() {
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
+  //   currentPlayer = currentPlayer === xPlayer ? oPlayer : xPlayer;
+
+  if (currentPlayer === xPlayer) {
+    currentPlayer = oPlayer;
+    countXPlayer += 1;
+    currentCount = countXPlayer;
+  } else {
+    currentPlayer = xPlayer;
+    countOPlayer += 1;
+    currentCount = countOPlayer + 1;
+  }
   statusDisplay.innerHTML = currentPlayerTurn();
+  console.log(countXPlayer, countOPlayer);
 }
 
 function handleResultValidation() {
@@ -83,6 +105,9 @@ function handleRestartGame() {
   gameState = ["", "", "", "", "", "", "", "", ""];
   statusDisplay.innerHTML = currentPlayerTurn();
   document.querySelectorAll(".item").forEach((elem) => (elem.innerHTML = ""));
+  countXPlayer = 0;
+  countOPlayer = 0;
+  currentCount = 0;
 }
 
 document
@@ -91,3 +116,12 @@ document
 document
   .querySelector(".start-game")
   .addEventListener("click", handleRestartGame);
+
+/* function playAudio() {
+    audio.currentTime = 0;
+    if(!isPlay) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  } */
