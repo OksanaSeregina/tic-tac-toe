@@ -48,6 +48,7 @@ header {
   width: 20%;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 .right-header {
   display: flex;

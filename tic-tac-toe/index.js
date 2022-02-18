@@ -3,6 +3,8 @@ const recordsView = document.querySelector(".records");
 const contentPlay = document.querySelector(".content");
 const contentTable = document.querySelector(".contentTable");
 const tBody = document.querySelector("tbody");
+const main = document.querySelector("main");
+const leftHeader = document.querySelector(".left-header");
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -36,7 +38,8 @@ const winningMessage = () => {
     winningMove: currentCount,
   });
   localStorage.setItem("oksanaRecords", JSON.stringify(records));
-  return `<h2 class="result-game">
+  return `
+  <h2 class="result-game">
     Player <span class="style-player ${classAdd()}">${currentPlayer}</span> won on turn ${currentCount}.
   </h2>
   <h2 class="result-game">
@@ -55,8 +58,9 @@ const drawMessage = () => {
     winningMove: "-",
   });
   localStorage.setItem("oksanaRecords", JSON.stringify(records));
-  return `<h2 class="result-game">
-  Game ended in a draw!
+  return `
+  <h2 class="result-game">
+    Game ended in a draw!
   </h2>`;
 };
 
@@ -96,7 +100,6 @@ function handlePlayerChange() {
     currentCount = countOPlayer + 1;
   }
   statusDisplay.innerHTML = currentPlayerTurn();
-  console.log(countXPlayer, countOPlayer);
 }
 
 function handleResultValidation() {
@@ -161,6 +164,12 @@ function showTable() {
 }
 
 function renderTable() {
+  if (!contentPlay.classList.contains("hide")) {
+    main.style.maxHeight = "calc(100vh - 180px)";
+  } else {
+    main.style.maxHeight = "100%";
+  }
+
   let resultRecords = [];
   resultRecords = JSON.parse(localStorage.getItem("oksanaRecords"));
   tBody.innerHTML = "";
@@ -183,6 +192,21 @@ function renderTable() {
   }
 }
 
+function showContentPlay() {
+  contentPlay.classList.remove("hide");
+  contentTable.classList.add("hide");
+  if (!contentTable.classList.contains("hide")) {
+    recordsView.textContent = "play";
+  } else {
+    recordsView.textContent = "table of records";
+  }
+  if (!contentPlay.classList.contains("hide")) {
+    main.style.maxHeight = "calc(100vh - 180px)";
+  } else {
+    main.style.maxHeight = "100%";
+  }
+}
+
 document
   .querySelector(".container-game")
   .addEventListener("click", handleItemClick);
@@ -190,6 +214,7 @@ document
   .querySelector(".start-game")
   .addEventListener("click", handleRestartGame);
 recordsView.addEventListener("click", showTable);
+leftHeader.addEventListener("click", showContentPlay);
 recordsView.addEventListener("click", renderTable);
 
 /* function playAudio() {
