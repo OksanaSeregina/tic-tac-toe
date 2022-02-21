@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <link
+      rel="shortcut icon"
+      href="assets/tic-tac-toe.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="wrapper">
+    <header>
+      <div class="header center">
+        <div class="left-header">
+          <img class="logo" src="./assets/svg/tic-tac-toe.svg" alt="logo" />
+          <h1 class="title">Tic Tac Toe</h1>
+        </div>
+        <div class="right-header">
+          <h2 class="records">table of records</h2>
+          <div class="sound"></div>
+        </div>
+      </div>
+    </header>
+    <main class="container">
+      <audio src="./assets/audio/game-music-7408.mp3"></audio>
+      <section class="content center">
+        <div class="container-game">
+          <div data-index="0" class="item"></div>
+          <div data-index="1" class="item"></div>
+          <div data-index="2" class="item"></div>
+          <div data-index="3" class="item"></div>
+          <div data-index="4" class="item"></div>
+          <div data-index="5" class="item"></div>
+          <div data-index="6" class="item"></div>
+          <div data-index="7" class="item"></div>
+          <div data-index="8" class="item"></div>
+        </div>
+        <h2 class="result-game"></h2>
+        <button class="start-game">start over</button>
+      </section>
+      <table class="contentTable center hide">
+        <caption>
+          TABLE OF RECORDS
+        </caption>
+        <thead>
+          <tr>
+            <th>winner</th>
+            <th>total moves</th>
+            <th>winning move</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+    <footer>
+      <div class="content-footer center">
+        <ul class="link-github">
+          <li class="item-link-github">&copy;</li>
+          <li class="item-link-github">2022</li>
+          <a
+            class="link-github-footer"
+            href="https://github.com/OksanaSeregina"
+            target="_blank"
+            ><li class="item-link-github">OksanaSeregina</li></a
+          >
+        </ul>
+        <a
+          class="center-content-footer"
+          href="https://rs.school/js-stage0/"
+          target="_blank"
+          ><img src="./assets/svg/rs_school_js.svg" alt="logo"
+        /></a>
+      </div>
+    </footer>
+    <script src="./index.js"></script>
+  </body>
+</html>
