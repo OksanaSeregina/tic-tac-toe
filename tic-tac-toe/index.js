@@ -36,6 +36,7 @@ audio.volume = 0;
 
 const audioVictory = new Audio();
 audioVictory.src = "./assets/audio/victory.mp3";
+audioVictory.volume = 0;
 
 function play() {
   audio.volume = "1";
@@ -46,9 +47,11 @@ function soundClick() {
   if (sound.classList.contains("sound-play")) {
     audio.play();
     audio.volume = 1;
+    audioVictory.volume = 1;
   } else {
     audio.pause();
     audio.volume = 0;
+    audioVictory.volume = 0;
   }
 }
 
@@ -83,7 +86,7 @@ const drawMessage = () => {
     records.shift();
   }
   records.push({
-    winner: "Game ended in a draw",
+    winner: "draw",
     totalMoves: countXPlayer + countOPlayer + 1,
     winningMove: "-",
   });
@@ -188,7 +191,9 @@ function showTable() {
   contentTable.classList.toggle("hide");
   if (!contentTable.classList.contains("hide")) {
     recordsView.textContent = "play";
-    audio.play();
+    if (audio.volume !== 0) {
+      audioVictory.play();
+    }
   } else {
     recordsView.textContent = "table of records";
   }
