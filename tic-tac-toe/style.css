@@ -214,6 +214,7 @@ footer {
   max-height: 50px;
   max-width: 150px;
   width: 100%;
+  height: 100%;
   object-fit: cover;
   filter: invert(93%) sepia(4%) saturate(1934%) hue-rotate(29deg)
     brightness(96%) contrast(93%);
@@ -306,6 +307,13 @@ footer {
   }
   .start-game {
     font-size: 1rem;
+  }
+  .link-github {
+    line-height: 33px;
+  }
+  .center-content-footer {
+    display: flex;
+    line-height: initial;
   }
 }
 
