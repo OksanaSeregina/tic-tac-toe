@@ -5,6 +5,7 @@ const contentTable = document.querySelector(".contentTable");
 const tBody = document.querySelector("tbody");
 const main = document.querySelector("main");
 const leftHeader = document.querySelector(".left-header");
+const sound = document.querySelector(".sound");
 const winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -28,7 +29,33 @@ let currentCount;
 let gameState = ["", "", "", "", "", "", "", "", ""];
 const records = [];
 
+const audio = new Audio();
+audio.src = "./assets/audio/game-music-7408.mp3";
+audio.loop = true;
+audio.volume = 0;
+
+const audioVictory = new Audio();
+audioVictory.src = "./assets/audio/victory.mp3";
+
+function play() {
+  audio.volume = "1";
+}
+
+function soundClick() {
+  sound.classList.toggle("sound-play");
+  if (sound.classList.contains("sound-play")) {
+    audio.play();
+    audio.volume = 1;
+  } else {
+    audio.pause();
+    audio.volume = 0;
+  }
+}
+
 const winningMessage = () => {
+  if (audio.volume !== 0) {
+    audioVictory.play();
+  }
   if (records.length === 10) {
     records.shift();
   }
@@ -37,6 +64,9 @@ const winningMessage = () => {
     totalMoves: countXPlayer + countOPlayer + 1,
     winningMove: currentCount,
   });
+
+  setTimeout(play, 4000);
+
   localStorage.setItem("oksanaRecords", JSON.stringify(records));
   return `
   <h2 class="result-game">
@@ -158,6 +188,7 @@ function showTable() {
   contentTable.classList.toggle("hide");
   if (!contentTable.classList.contains("hide")) {
     recordsView.textContent = "play";
+    audio.play();
   } else {
     recordsView.textContent = "table of records";
   }
@@ -207,6 +238,7 @@ function showContentPlay() {
   }
 }
 
+console.log(document.documentElement.clientWidth);
 document
   .querySelector(".container-game")
   .addEventListener("click", handleItemClick);
@@ -216,12 +248,8 @@ document
 recordsView.addEventListener("click", showTable);
 leftHeader.addEventListener("click", showContentPlay);
 recordsView.addEventListener("click", renderTable);
+sound.addEventListener("click", soundClick);
 
-/* function playAudio() {
-    audio.currentTime = 0;
-    if(!isPlay) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
-  } */
+document.querySelectorAll(".item").forEach((elem) => {
+  elem.addEventListener("click", () => (audio.volume = "0.2"));
+});

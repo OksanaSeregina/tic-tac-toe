@@ -9,7 +9,7 @@ h2 {
   font-size: 2rem;
 }
 body {
-  height: 100vh;
+  height: calc(100vh - 180px);
   font-family: "Inter", sans-serif;
   font-style: normal;
   line-height: 50px;
@@ -59,8 +59,6 @@ header {
   width: 60px;
   max-width: 100%;
   object-fit: cover;
-  /* filter: invert(93%) sepia(4%) saturate(1934%) hue-rotate(29deg)
-    brightness(96%) contrast(93%); */
   filter: invert(54%) sepia(59%) saturate(1098%) hue-rotate(283deg)
     brightness(98%) contrast(97%);
 }
@@ -79,6 +77,9 @@ header {
   color: #bdef53;
 }
 .sound {
+  background-image: url(./assets/svg/mute.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   width: 50px;
   height: 50px;
   filter: invert(93%) sepia(4%) saturate(1934%) hue-rotate(29deg)
@@ -89,15 +90,18 @@ header {
   filter: invert(74%) sepia(98%) saturate(302%) hue-rotate(27deg)
     brightness(157%) contrast(88%);
 }
+.sound-play {
+  background-image: url(./assets/svg/volume.svg);
+}
 main {
   display: flex;
   align-items: center;
   max-height: calc(100vh - 180px);
   height: 100%;
+  overflow: auto;
 }
 section {
   text-align: center;
-  /* display: none; */
 }
 .container-game {
   display: grid;
@@ -208,7 +212,6 @@ footer {
 }
 .center-content-footer img {
   max-height: 50px;
-  height: 100%;
   max-width: 100%;
   width: 100%;
   object-fit: cover;
@@ -219,4 +222,106 @@ footer {
 .center-content-footer img:hover {
   filter: invert(74%) sepia(98%) saturate(302%) hue-rotate(27deg)
     brightness(107%) contrast(88%);
+}
+
+/*Media */
+@media screen and (max-width: 1400px) {
+  .center {
+    width: 90%;
+  }
+  .left-header {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .left-header {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
+  .records {
+    font-size: 0.8rem;
+  }
+  .sound {
+    width: 30px;
+    height: 30px;
+  }
+  footer {
+    font-size: 1rem;
+  }
+  .style-player {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    align-self: stretch;
+  }
+  .left-header {
+    width: 50%;
+  }
+  .right-header {
+    flex-direction: column-reverse;
+    align-items: end;
+  }
+  .records {
+    margin-right: 0;
+    line-height: 35px;
+  }
+  .start-game {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  body {
+    font-size: 0.9rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  .content-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+  .container-game {
+    width: 246px;
+  }
+  .item {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+  }
+  .start-game {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  body {
+    font-size: 0.8rem;
+  }
+  .left-header {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .title {
+    line-height: 20px;
+  }
+  .logo {
+    height: 50px;
+    width: 50px;
+  }
 }
