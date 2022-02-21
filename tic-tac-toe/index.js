@@ -27,7 +27,7 @@ let countOPlayer = 0;
 let currentCount;
 
 let gameState = ["", "", "", "", "", "", "", "", ""];
-const records = [];
+const records = JSON.parse(localStorage.getItem("oksanaRecords")) || [];
 
 const audio = new Audio();
 audio.src = "./assets/audio/game-music-7408.mp3";
@@ -191,9 +191,6 @@ function showTable() {
   contentTable.classList.toggle("hide");
   if (!contentTable.classList.contains("hide")) {
     recordsView.textContent = "play";
-    if (audio.volume !== 0) {
-      audioVictory.play();
-    }
   } else {
     recordsView.textContent = "table of records";
   }
@@ -202,8 +199,12 @@ function showTable() {
 function renderTable() {
   if (!contentPlay.classList.contains("hide")) {
     main.style.maxHeight = "calc(100vh - 180px)";
+    main.style.height = "100%";
+    main.style.marginBottom = "0";
   } else {
-    main.style.maxHeight = "100%";
+    main.style.maxHeight = "fit-content";
+    main.style.height = "auto";
+    main.style.marginBottom = "20px";
   }
 
   let resultRecords = [];
@@ -238,12 +239,15 @@ function showContentPlay() {
   }
   if (!contentPlay.classList.contains("hide")) {
     main.style.maxHeight = "calc(100vh - 180px)";
+    main.style.height = "100%";
+    main.style.marginBottom = "0";
   } else {
-    main.style.maxHeight = "100%";
+    main.style.maxHeight = "fit-content";
+    main.style.height = "auto";
+    main.style.marginBottom = "20px";
   }
 }
 
-console.log(document.documentElement.clientWidth);
 document
   .querySelector(".container-game")
   .addEventListener("click", handleItemClick);
@@ -258,3 +262,16 @@ sound.addEventListener("click", soundClick);
 document.querySelectorAll(".item").forEach((elem) => {
   elem.addEventListener("click", () => (audio.volume = "0.2"));
 });
+
+console.log(`
+1.Вёрстка +10
+2.При кликах по игровому полю по очереди отображаются крестики и нолики. Первая фигура всегда крестик +10
+3.Игра завершается, когда три фигуры выстроились в ряд по вертикали, горизонтали или диагонали +10
+4.По окончанию игры выводится её результат - выигравшая фигура и количество ходов от начала игры до её завершения +10
+5.Результаты последних 10 игр сохраняются в local storage. Есть таблица рекордов, в которой отображаются результаты предыдущих 10 игр +10
+6.Звуки в игре +10
+7.Очень высокое качество оформления приложения и/или дополнительный не предусмотренный в задании функционал, улучшающий качество приложения +10
+высокое качество оформления приложения предполагает собственное оригинальное оформление равное или отличающееся в лучшую сторону по сравнению с демо
+
+Score: 60 баллов
+`);

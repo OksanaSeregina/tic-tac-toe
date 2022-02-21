@@ -98,7 +98,6 @@ main {
   align-items: center;
   max-height: calc(100vh - 180px);
   height: 100%;
-  overflow: auto;
 }
 section {
   text-align: center;
